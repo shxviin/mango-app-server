@@ -1,21 +1,22 @@
 const router = require('express').Router();
 const Booking = require('../models/Booking');
 
-
 router.route('/add').post((req, res) => {
 
     const roomId = req.body.roomId;
-    const userId = req.body.userId;
+    // const userId = req.body.userId;
     const checkInDate = req.body.checkInDate;
     const checkOutDate = req.body.checkOutDate;
     const isParkingSlotRequired = req.body.isParkingSlotRequired;
     const notes = req.body.notes;
     const fee = req.body.fee;
     const paymentMethod = req.body.paymentMethod;
+    const typeOfStay = req.body.typeOfStay;
+    const numOfGuests = req.body.numOfGuests;
 
 
-    const newBooking = new Booking({roomId, userId, checkInDate, 
-        checkOutDate, isParkingSlotRequired, notes, fee, paymentMethod});
+    const newBooking = new Booking({roomId, checkInDate, 
+        checkOutDate, isParkingSlotRequired, notes, fee, paymentMethod, typeOfStay, numOfGuests});
 
     newBooking.save()
         .then(() => res.json('Booking Added'))
@@ -24,10 +25,8 @@ router.route('/add').post((req, res) => {
 
 router.route('/validate/:roomId').post((req, res) => {
 
-
     const checkInDate = new Date(req.body.checkIn).toISOString().split('T')[0];
     const checkOutDate = new Date(req.body.checkOut).toISOString().split('T')[0];
-
 
     Booking.find({roomId:req.params.roomId})
         .then(responses => {

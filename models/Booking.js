@@ -7,10 +7,10 @@ const bookingShema = new Schema({
         type: String,
         required: true,
     },
-    userId: {
-        type: String,
-        required: true,
-    },
+    // userId: {
+    //     type: String,
+    //     required: true,
+    // },
     checkInDate: {
         type: Date,
         required: true,
@@ -31,6 +31,14 @@ const bookingShema = new Schema({
         required: true,
     },
     paymentMethod: {
+        type: String,
+        required: true,
+    },
+    typeOfStay: {
+        type: String,
+        required: true,
+    },
+    numOfGuests: {
         type: String,
         required: true,
     },
